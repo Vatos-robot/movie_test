@@ -1,0 +1,11 @@
+# Python / Django
+__pycache__/
+*.py[cod]
+env/
+db.sqlite3
+
+# Node / Vue
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
