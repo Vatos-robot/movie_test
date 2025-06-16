@@ -1,17 +1,6 @@
 version: '3.9'
 
 services:
-  db:
-    image: postgres:15
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: filmdb
-      POSTGRES_USER: filmuser
-      POSTGRES_PASSWORD: secret
-    networks:
-      - filmnet
-
   backend:
     build:
       context: ./backend
@@ -20,12 +9,6 @@ services:
       - ./backend:/app
     ports:
       - "8000:8000"
-    environment:
-      DATABASE_URL: postgres://filmuser:secret@db:5432/filmdb
-    depends_on:
-      - db
-    networks:
-      - filmnet
 
   frontend:
     build:
@@ -36,11 +19,3 @@ services:
       - "3000:80"
     depends_on:
       - backend
-    networks:
-      - filmnet
-
-volumes:
-  postgres_data:
-
-networks:
-  filmnet:
